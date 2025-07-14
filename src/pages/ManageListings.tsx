@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Plus, 
-  Edit3, 
-  Trash2, 
-  Eye, 
-  MapPin, 
-  TreePine, 
-  DollarSign, 
+import {
+  Plus,
+  Edit3,
+  Trash2,
+  Eye,
+  MapPin,
+  TreePine,
+  DollarSign,
   Calendar,
   TrendingUp,
   Filter,
@@ -49,7 +49,7 @@ export function ManageListings() {
       views: 1247,
       inquiries: 23,
       rating: 4.9,
-      image: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=compress&w=400&h=250&fit=crop', // Rainforest
       createdAt: '2025-01-10',
       lastUpdated: '2025-01-15'
     },
@@ -65,7 +65,7 @@ export function ManageListings() {
       views: 892,
       inquiries: 18,
       rating: 4.8,
-      image: 'https://images.pexels.com/photos/3889687/pexels-photo-3889687.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=compress&w=400&h=250&fit=crop', // Mangroves
       createdAt: '2025-01-08',
       lastUpdated: '2025-01-14'
     },
@@ -81,7 +81,7 @@ export function ManageListings() {
       views: 634,
       inquiries: 12,
       rating: 4.6,
-      image: 'https://images.pexels.com/photos/1413412/pexels-photo-1413412.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=compress&w=400&h=250&fit=crop', // Forest/grassland
       createdAt: '2025-01-12',
       lastUpdated: '2025-01-13'
     }
@@ -108,7 +108,7 @@ export function ManageListings() {
 
   const filteredListings = listings.filter(listing => {
     const matchesSearch = listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         listing.location.toLowerCase().includes(searchTerm.toLowerCase());
+      listing.location.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || listing.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -137,7 +137,7 @@ export function ManageListings() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Breadcrumbs />
-        
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -211,7 +211,7 @@ export function ManageListings() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="flex gap-4">
                   <select
                     value={statusFilter}
@@ -224,7 +224,7 @@ export function ManageListings() {
                     <option value="sold">Sold</option>
                     <option value="draft">Draft</option>
                   </select>
-                  
+
                   <button className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                     <Filter className="h-4 w-4" />
                     More Filters
@@ -249,8 +249,8 @@ export function ManageListings() {
                     className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300"
                   >
                     <div className="relative">
-                      <img 
-                        src={listing.image} 
+                      <img
+                        src={listing.image}
                         alt={listing.title}
                         className="w-full h-48 object-cover"
                       />
@@ -272,7 +272,7 @@ export function ManageListings() {
                         </div>
                       )}
                     </div>
-                    
+
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
@@ -283,14 +283,14 @@ export function ManageListings() {
                           <span className="text-sm text-gray-600 ml-1">{listing.rating}</span>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center text-gray-600 mb-3">
                         <MapPin className="h-4 w-4 mr-1" />
                         <span className="text-sm">{listing.location}</span>
                         <span className="mx-2">•</span>
                         <span className="text-sm">{listing.area}</span>
                       </div>
-                      
+
                       <div className="flex items-center justify-between mb-4">
                         <div>
                           <div className="text-2xl font-bold text-gray-900">
@@ -310,11 +310,11 @@ export function ManageListings() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="text-xs text-gray-500 mb-4">
                         Created: {listing.createdAt} • Updated: {listing.lastUpdated}
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <motion.button
                           whileHover={{ scale: 1.02 }}
@@ -356,7 +356,7 @@ export function ManageListings() {
                 <TreePine className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No listings found</h3>
                 <p className="text-gray-600 mb-6">
-                  {searchTerm || statusFilter !== 'all' 
+                  {searchTerm || statusFilter !== 'all'
                     ? 'Try adjusting your search criteria or filters.'
                     : 'Get started by creating your first carbon credit listing.'
                   }

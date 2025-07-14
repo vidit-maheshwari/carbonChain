@@ -20,22 +20,22 @@ function Marketplace() {
       available: 2450,
       rating: 4.9,
       verified: true,
-      image: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=compress&w=400&h=250&fit=crop', // Lush rainforest
       seller: 'Forest Conservation Inc.',
       description: 'High-quality carbon credits from protected rainforest areas with satellite monitoring.'
     },
     {
       id: 2,
-      title: 'Renewable Energy Project',
-      type: 'Technology-based',
-      location: 'Costa Rica',
-      price: 78,
-      available: 1890,
-      rating: 4.7,
+      title: 'Mountain River Protection',
+      type: 'Nature-based',
+      location: 'Nepal',
+      price: 102,
+      available: 980,
+      rating: 4.8,
       verified: true,
-      image: 'https://images.pexels.com/photos/2850347/pexels-photo-2850347.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      seller: 'Green Energy Solutions',
-      description: 'Carbon credits generated from wind and solar energy installations.'
+      image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=compress&w=400&h=250&fit=crop', // Mountain river
+      seller: 'Himalayan Eco Trust',
+      description: 'Preserving pristine mountain rivers and their surrounding forests.'
     },
     {
       id: 3,
@@ -46,38 +46,25 @@ function Marketplace() {
       available: 856,
       rating: 4.8,
       verified: true,
-      image: 'https://images.pexels.com/photos/3889687/pexels-photo-3889687.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=compress&w=400&h=250&fit=crop', // Mangroves
       seller: 'Coastal Restoration Org',
       description: 'Mangrove reforestation project with community involvement and biodiversity benefits.'
     },
     {
       id: 4,
-      title: 'Urban Forest Initiative',
+      title: 'Wildlife Habitat Preservation',
       type: 'Nature-based',
-      location: 'USA',
-      price: 89,
-      available: 1250,
-      rating: 4.6,
+      location: 'Kenya',
+      price: 120,
+      available: 700,
+      rating: 4.9,
       verified: true,
-      image: 'https://images.pexels.com/photos/1413412/pexels-photo-1413412.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      seller: 'City Green Projects',
-      description: 'Urban reforestation and tree planting in metropolitan areas.'
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=compress&w=400&h=250&fit=crop', // Wildlife/savannah
+      seller: 'Savannah Guardians',
+      description: 'Protecting wildlife habitats and supporting biodiversity in African savannahs.'
     },
     {
       id: 5,
-      title: 'Soil Carbon Sequestration',
-      type: 'Agriculture-based',
-      location: 'Canada',
-      price: 67,
-      available: 3240,
-      rating: 4.5,
-      verified: true,
-      image: 'https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
-      seller: 'AgriCarbon Co.',
-      description: 'Carbon sequestration through sustainable farming practices and soil health improvement.'
-    },
-    {
-      id: 6,
       title: 'Peat Bog Restoration',
       type: 'Nature-based',
       location: 'Scotland',
@@ -85,18 +72,44 @@ function Marketplace() {
       available: 789,
       rating: 4.9,
       verified: true,
-      image: 'https://images.pexels.com/photos/3773575/pexels-photo-3773575.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop',
+      image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=compress&w=400&h=250&fit=crop', // Peat bog
       seller: 'Highland Conservation',
       description: 'Peat bog restoration with exceptional carbon storage capacity and biodiversity benefits.'
+    },
+    {
+      id: 6,
+      title: 'Forest Waterfall Sanctuary',
+      type: 'Nature-based',
+      location: 'Canada',
+      price: 110,
+      available: 1200,
+      rating: 4.7,
+      verified: true,
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=compress&w=400&h=250&fit=crop', // Waterfall
+      seller: 'Maple Forest Trust',
+      description: 'Preserving forested areas with beautiful waterfalls and rich biodiversity.'
+    },
+    {
+      id: 7,
+      title: 'Grassland Carbon Project',
+      type: 'Nature-based',
+      location: 'Argentina',
+      price: 80,
+      available: 2100,
+      rating: 4.6,
+      verified: true,
+      image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=compress&w=400&h=250&fit=crop', // Grassland
+      seller: 'Pampas Green Initiative',
+      description: 'Restoring native grasslands for carbon sequestration and wildlife.'
     }
   ];
 
   const filteredCredits = credits.filter(credit => {
     const matchesSearch = credit.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         credit.location.toLowerCase().includes(searchTerm.toLowerCase());
+      credit.location.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = filters.type === 'all' || credit.type.toLowerCase().includes(filters.type);
     const matchesLocation = filters.location === 'all' || credit.location === filters.location;
-    
+
     return matchesSearch && matchesType && matchesLocation;
   });
 
@@ -126,11 +139,11 @@ function Marketplace() {
                 />
               </div>
             </div>
-            
+
             <div className="flex gap-4">
               <select
                 value={filters.type}
-                onChange={(e) => setFilters({...filters, type: e.target.value})}
+                onChange={(e) => setFilters({ ...filters, type: e.target.value })}
                 className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               >
                 <option value="all">All Types</option>
@@ -138,10 +151,10 @@ function Marketplace() {
                 <option value="technology">Technology-based</option>
                 <option value="agriculture">Agriculture-based</option>
               </select>
-              
+
               <select
                 value={filters.location}
-                onChange={(e) => setFilters({...filters, location: e.target.value})}
+                onChange={(e) => setFilters({ ...filters, location: e.target.value })}
                 className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               >
                 <option value="all">All Locations</option>
@@ -152,7 +165,7 @@ function Marketplace() {
                 <option value="Canada">Canada</option>
                 <option value="Scotland">Scotland</option>
               </select>
-              
+
               <button className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                 <Filter className="h-4 w-4" />
                 Filters
@@ -165,8 +178,8 @@ function Marketplace() {
           {filteredCredits.map((credit) => (
             <div key={credit.id} className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-shadow group">
               <div className="relative">
-                <img 
-                  src={credit.image} 
+                <img
+                  src={credit.image}
                   alt={credit.title}
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -179,7 +192,7 @@ function Marketplace() {
                   <span className="text-sm font-medium text-gray-900">{credit.type}</span>
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
@@ -190,16 +203,16 @@ function Marketplace() {
                     <span className="text-sm text-gray-600 ml-1">{credit.rating}</span>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center text-gray-600 mb-3">
                   <MapPin className="h-4 w-4 mr-1" />
                   <span className="text-sm">{credit.location}</span>
                 </div>
-                
+
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                   {credit.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <div className="text-2xl font-bold text-gray-900">
@@ -215,11 +228,11 @@ function Marketplace() {
                     <div className="text-xs text-gray-500">Verified</div>
                   </div>
                 </div>
-                
+
                 <div className="text-xs text-gray-500 mb-4">
                   Sold by: {credit.seller}
                 </div>
-                
+
                 <div className="flex gap-2">
                   <button className="flex-1 bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors">
                     Purchase

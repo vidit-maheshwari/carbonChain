@@ -8,9 +8,11 @@ interface RoleBasedAuthModalProps {
   userType: 'retailer' | 'assetOwner';
   onClose: () => void;
   onAuth: (user: UserType) => void;
+  setAuthMode: (mode: 'login' | 'register') => void;
+  setUserType: (type: 'retailer' | 'assetOwner') => void;
 }
 
-export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBasedAuthModalProps) {
+export function RoleBasedAuthModal({ mode, userType, onClose, onAuth, setAuthMode, setUserType }: RoleBasedAuthModalProps) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -23,7 +25,7 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Simulate authentication
     const user: UserType = {
       id: Math.random().toString(36).substr(2, 9),
@@ -32,7 +34,7 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
       type: userType,
       company: formData.company || undefined
     };
-    
+
     onAuth(user);
   };
 
@@ -80,15 +82,15 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
 
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
       transition: { duration: 0.3, ease: "easeOut" }
     },
-    exit: { 
-      opacity: 0, 
-      scale: 0.8, 
+    exit: {
+      opacity: 0,
+      scale: 0.8,
       y: 50,
       transition: { duration: 0.2 }
     }
@@ -96,8 +98,8 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
 
   const formVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: { delay: 0.2, duration: 0.3 }
     }
@@ -105,8 +107,8 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
 
   const featureVariants = {
     hidden: { opacity: 0, x: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       x: 0,
       transition: { delay: 0.4, duration: 0.3 }
     }
@@ -119,22 +121,20 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-screen overflow-y-auto"
       >
-        <div className="flex">
+        <div className="flex flex-col md:flex-row h-full">
           {/* Left Panel - Form */}
-          <motion.div 
+          <motion.div
             variants={formVariants}
             className="flex-1 p-8"
           >
             <div className="flex justify-between items-center mb-6">
               <div className="flex items-center space-x-3">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  config.primaryColor === 'blue' ? 'bg-blue-100' : 'bg-green-100'
-                }`}>
-                  <IconComponent className={`h-6 w-6 ${
-                    config.primaryColor === 'blue' ? 'text-blue-600' : 'text-green-600'
-                  }`} />
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${config.primaryColor === 'blue' ? 'bg-blue-100' : 'bg-green-100'
+                  }`}>
+                  <IconComponent className={`h-6 w-6 ${config.primaryColor === 'blue' ? 'text-blue-600' : 'text-green-600'
+                    }`} />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
@@ -298,11 +298,10 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-                  config.primaryColor === 'blue'
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
-                    : 'bg-green-600 text-white hover:bg-green-700'
-                }`}
+                className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${config.primaryColor === 'blue'
+                  ? 'bg-blue-600 text-white hover:bg-blue-700'
+                  : 'bg-green-600 text-white hover:bg-green-700'
+                  }`}
               >
                 {mode === 'login' ? 'Sign In' : 'Create Account'}
               </motion.button>
@@ -313,14 +312,13 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
                 {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
                 <button
                   onClick={() => {
-                    // This would toggle between login/register modes
-                    onClose();
+                    // Toggle between login/register modes
+                    setAuthMode(mode === 'login' ? 'register' : 'login');
                   }}
-                  className={`ml-1 font-medium ${
-                    config.primaryColor === 'blue'
-                      ? 'text-blue-600 hover:text-blue-700'
-                      : 'text-green-600 hover:text-green-700'
-                  }`}
+                  className={`ml-1 font-medium ${config.primaryColor === 'blue'
+                    ? 'text-blue-600 hover:text-blue-700'
+                    : 'text-green-600 hover:text-green-700'
+                    }`}
                 >
                   {mode === 'login' ? 'Sign up' : 'Sign in'}
                 </button>
@@ -329,14 +327,13 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
           </motion.div>
 
           {/* Right Panel - Features */}
-          <motion.div 
+          <motion.div
             variants={featureVariants}
             className={`flex-1 bg-gradient-to-br ${config.bgGradient} p-8 flex flex-col justify-center`}
           >
             <div className="text-center mb-8">
-              <div className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 ${
-                config.primaryColor === 'blue' ? 'bg-blue-600' : 'bg-green-600'
-              }`}>
+              <div className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 ${config.primaryColor === 'blue' ? 'bg-blue-600' : 'bg-green-600'
+                }`}>
                 {userType === 'assetOwner' ? (
                   <TreePine className="h-10 w-10 text-white" />
                 ) : (
@@ -347,7 +344,7 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
                 {userType === 'assetOwner' ? 'Monetize Your Green Assets' : 'Track & Reduce Emissions'}
               </h3>
               <p className="text-gray-600">
-                {userType === 'assetOwner' 
+                {userType === 'assetOwner'
                   ? 'Turn your forests and green spaces into verified carbon credits'
                   : 'AI-powered carbon management for sustainable business growth'
                 }
@@ -363,9 +360,8 @@ export function RoleBasedAuthModal({ mode, userType, onClose, onAuth }: RoleBase
                   transition={{ delay: 0.6 + index * 0.1 }}
                   className="flex items-center space-x-3"
                 >
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                    config.primaryColor === 'blue' ? 'bg-blue-600' : 'bg-green-600'
-                  }`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${config.primaryColor === 'blue' ? 'bg-blue-600' : 'bg-green-600'
+                    }`}>
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>

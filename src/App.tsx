@@ -9,8 +9,8 @@ import { ManageListings } from './pages/ManageListings';
 import Marketplace from './pages/Marketplace';
 import CarbonEstimator from './pages/CarbonEstimator';
 import Analytics from './pages/Analytics';
-import Pricing from './pages/Pricing';
 import Support from './pages/Support';
+import Settings from './pages/Settings';
 import { RoleBasedAuthModal } from './components/auth/RoleBasedAuthModal';
 
 export interface User {
@@ -45,32 +45,32 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        <RoleBasedHeader 
-          user={user} 
-          onAuth={openAuth} 
-          onLogout={logout} 
+        <RoleBasedHeader
+          user={user}
+          onAuth={openAuth}
+          onLogout={logout}
         />
-        
+
         <main>
           <Routes>
             <Route path="/" element={<LandingPage onAuth={openAuth} />} />
-            <Route 
-              path="/retailer-dashboard" 
-              element={user?.type === 'retailer' ? <RetailerDashboard user={user} /> : <LandingPage onAuth={openAuth} />} 
+            <Route
+              path="/retailer-dashboard"
+              element={user?.type === 'retailer' ? <RetailerDashboard user={user} /> : <LandingPage onAuth={openAuth} />}
             />
-            <Route 
-              path="/asset-owner-dashboard" 
-              element={user?.type === 'assetOwner' ? <EnhancedAssetOwnerDashboard user={user} /> : <LandingPage onAuth={openAuth} />} 
+            <Route
+              path="/asset-owner-dashboard"
+              element={user?.type === 'assetOwner' ? <EnhancedAssetOwnerDashboard user={user} /> : <LandingPage onAuth={openAuth} />}
             />
-            <Route 
-              path="/manage-listings" 
-              element={user?.type === 'assetOwner' ? <ManageListings /> : <LandingPage onAuth={openAuth} />} 
+            <Route
+              path="/manage-listings"
+              element={user?.type === 'assetOwner' ? <ManageListings /> : <LandingPage onAuth={openAuth} />}
             />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/carbon-estimator" element={<CarbonEstimator />} />
             <Route path="/analytics" element={<Analytics />} />
-            <Route path="/pricing" element={<Pricing />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
 
@@ -82,6 +82,8 @@ function App() {
             userType={userType}
             onClose={() => setShowAuthModal(false)}
             onAuth={handleAuth}
+            setAuthMode={setAuthMode}
+            setUserType={setUserType}
           />
         )}
       </div>

@@ -33,7 +33,6 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
         { name: 'Marketplace', href: '/marketplace' },
         { name: 'Carbon Estimator', href: '/carbon-estimator' },
         { name: 'Analytics', href: '/analytics' },
-        { name: 'Pricing', href: '/pricing' },
         { name: 'Support', href: '/support' },
       ];
     }
@@ -54,7 +53,6 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
         { name: 'Marketplace', href: '/marketplace' },
         { name: 'Carbon Estimator', href: '/carbon-estimator' },
         { name: 'Analytics', href: '/analytics' },
-        { name: 'Pricing', href: '/pricing' },
         { name: 'Support', href: '/support' },
       ];
     }
@@ -84,14 +82,14 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
   };
 
   const logoVariants = {
-    hover: { 
+    hover: {
       scale: 1.05,
       transition: { duration: 0.2 }
     }
   };
 
   const navItemVariants = {
-    hover: { 
+    hover: {
       y: -2,
       transition: { duration: 0.2 }
     }
@@ -99,23 +97,22 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
 
   const mobileMenuVariants = {
     hidden: { opacity: 0, height: 0 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       height: 'auto',
       transition: { duration: 0.3 }
     }
   };
 
   return (
-    <motion.header 
+    <motion.header
       variants={headerVariants}
       initial="initial"
       animate="animate"
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-          : 'bg-white shadow-sm'
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-white/95 backdrop-blur-md shadow-lg'
+        : 'bg-white shadow-sm'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -145,13 +142,12 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
               >
                 <Link
                   to={item.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                    location.pathname === item.href
-                      ? 'text-green-600 bg-green-50'
-                      : item.highlight
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${location.pathname === item.href
+                    ? 'text-green-600 bg-green-50'
+                    : item.highlight
                       ? 'text-white bg-green-600 hover:bg-green-700'
                       : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
-                  }`}
+                    }`}
                 >
                   {item.name}
                   {location.pathname === item.href && !item.highlight && (
@@ -188,11 +184,10 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className="flex items-center space-x-2 p-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      user.type === 'assetOwner' ? 'bg-blue-100' : 'bg-green-100'
-                    }`}>
-                      {React.createElement(getUserTypeIcon(), { 
-                        className: `h-4 w-4 ${user.type === 'assetOwner' ? 'text-blue-600' : 'text-green-600'}` 
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${user.type === 'assetOwner' ? 'bg-blue-100' : 'bg-green-100'
+                      }`}>
+                      {React.createElement(getUserTypeIcon(), {
+                        className: `h-4 w-4 ${user.type === 'assetOwner' ? 'text-blue-600' : 'text-green-600'}`
                       })}
                     </div>
                     <div className="text-left">
@@ -251,31 +246,53 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
               </div>
             ) : (
               <div className="flex items-center space-x-3">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => onAuth('login', 'retailer')}
-                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
-                >
-                  Sign In
-                </motion.button>
-                <div className="flex items-center space-x-2">
+                {/* Sign In Dropdown */}
+                <div className="relative group">
                   <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(34, 197, 94, 0.3)" }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => onAuth('register', 'retailer')}
+                    className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors px-4 py-2 rounded-lg"
+                  >
+                    Sign In
+                  </motion.button>
+                  <div className="absolute left-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-200 py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity z-50">
+                    <button
+                      onClick={() => onAuth('login', 'retailer')}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                    >
+                      As Retailer
+                    </button>
+                    <button
+                      onClick={() => onAuth('login', 'assetOwner')}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    >
+                      As Asset Owner
+                    </button>
+                  </div>
+                </div>
+                {/* Join Dropdown */}
+                <div className="relative group">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-all duration-200 shadow-md"
                   >
-                    Join as Retailer
+                    Join
                   </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)" }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => onAuth('register', 'assetOwner')}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all duration-200 shadow-md"
-                  >
-                    Join as Asset Owner
-                  </motion.button>
+                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 py-2 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto pointer-events-none transition-opacity z-50">
+                    <button
+                      onClick={() => onAuth('register', 'retailer')}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors"
+                    >
+                      As Retailer
+                    </button>
+                    <button
+                      onClick={() => onAuth('register', 'assetOwner')}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    >
+                      As Asset Owner
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -313,20 +330,19 @@ export function RoleBasedHeader({ user, onAuth, onLogout }: RoleBasedHeaderProps
                 >
                   <Link
                     to={item.href}
-                    className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${
-                      location.pathname === item.href
-                        ? 'text-green-600 bg-green-50'
-                        : item.highlight
+                    className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${location.pathname === item.href
+                      ? 'text-green-600 bg-green-50'
+                      : item.highlight
                         ? 'text-white bg-green-600'
                         : 'text-gray-700 hover:text-green-600 hover:bg-green-50'
-                    }`}
+                      }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
                   </Link>
                 </motion.div>
               ))}
-              
+
               {user ? (
                 <div className="pt-4 border-t border-gray-200">
                   <div className="px-3 py-2 text-sm text-gray-500">

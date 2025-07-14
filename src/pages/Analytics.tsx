@@ -1,7 +1,37 @@
 import React from 'react';
 import { TrendingUp, BarChart3, PieChart, Calendar } from 'lucide-react';
+import { BaseChart } from '../components/charts/BaseChart';
 
 function Analytics() {
+  // Mock data for charts
+  const emissionsTrendData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'Emissions (tons CO₂)',
+        data: [120, 110, 105, 98, 90, 85],
+        borderColor: 'rgb(34, 197, 94)',
+        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  };
+  const offsetDistributionData = {
+    labels: ['Forest', 'Grassland', 'Wetland', 'Agricultural'],
+    datasets: [
+      {
+        data: [45, 25, 20, 10],
+        backgroundColor: [
+          '#10b981',
+          '#84cc16',
+          '#06b6d4',
+          '#f59e0b'
+        ],
+        borderWidth: 0
+      }
+    ]
+  };
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -36,18 +66,24 @@ function Analytics() {
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Emissions Trend
             </h3>
-            <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-              <p className="text-gray-500">Interactive Chart Placeholder</p>
-            </div>
+            <BaseChart
+              type="line"
+              data={emissionsTrendData}
+              title="Emissions Trend"
+              height={250}
+            />
           </div>
 
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Offset Distribution
             </h3>
-            <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-              <p className="text-gray-500">Pie Chart Placeholder</p>
-            </div>
+            <BaseChart
+              type="doughnut"
+              data={offsetDistributionData}
+              title="Offset Distribution"
+              height={250}
+            />
           </div>
         </div>
       </div>

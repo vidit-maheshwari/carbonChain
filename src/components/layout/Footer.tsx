@@ -33,22 +33,22 @@ function Footer() {
               <span className="text-xl font-bold">CarbonChain</span>
             </div>
             <p className="text-gray-300 mb-6 max-w-md">
-              Democratizing carbon markets through AI-driven technology. 
-              Connect retailers with green asset owners for transparent 
-              carbon tracking and trading.
+              Empowering India's green future through AI-driven carbon markets.
+              Connect Indian retailers with green asset owners for transparent
+              carbon tracking and trading. Supporting India's sustainability and climate goals.
             </p>
             <div className="space-y-2 text-gray-300">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>contact@carbonchain.io</span>
+                <span>contact@carbonchain.in</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 98765 43210</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>San Francisco, CA</span>
+                <span>Mumbai, India 🇮🇳</span>
               </div>
             </div>
           </div>
@@ -58,8 +58,8 @@ function Footer() {
             <ul className="space-y-2">
               {footerLinks.platform.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-gray-300 hover:text-green-400 transition-colors"
                   >
                     {link.name}
@@ -74,8 +74,8 @@ function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-gray-300 hover:text-green-400 transition-colors"
                   >
                     {link.name}
@@ -90,8 +90,8 @@ function Footer() {
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-gray-300 hover:text-green-400 transition-colors"
                   >
                     {link.name}
@@ -105,16 +105,16 @@ function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 CarbonChain. All rights reserved.
+              © 2025 CarbonChain India. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <span className="text-gray-400 text-sm">Certified by:</span>
               <div className="flex items-center space-x-4">
                 <span className="bg-green-600 text-white px-3 py-1 rounded text-xs font-medium">
-                  Verra
+                  CII
                 </span>
                 <span className="bg-blue-600 text-white px-3 py-1 rounded text-xs font-medium">
-                  Gold Standard
+                  IGBC
                 </span>
               </div>
             </div>
